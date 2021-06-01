@@ -1,9 +1,9 @@
 > vue 项目搭建
 
-[webpack环境配置](#webpack环境配置)
-[配置TS环境](#配置TS环境)
-[配置Dev环境](#配置Dev环境)
-[配置webpack实用工具](#配置webpack实用工具)
+- [webpack环境配置](#webpack环境配置)
+- [配置TS环境](#配置TS环境)
+- [配置Dev环境](#配置Dev环境)
+- [配置webpack实用工具](#配置webpack实用工具)
 
 
 
