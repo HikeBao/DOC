@@ -1,1 +1,1 @@
-![](./images/system.png)
+![](./static/system.png)
