@@ -38,7 +38,9 @@
 - Tool
   - [Typescript](./tool/typescript.md)
   - [Webpack_Vue](./tool/webpack_vue.md)
-  - [Version_Control](./tool/npm_yarn.md)
+  - [Package_Control](./tool/npm_yarn.md)
+  - [Git](./tool/git.md)
+  - [Shell](./tool/shell.md)
 - 计算机四大神器
   - [数据结构](./computer/data_structure.md)
   - [计算机网络](./computer/network.md)
