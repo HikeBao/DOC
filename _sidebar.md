@@ -1,5 +1,4 @@
-- ECMA
-  - [ECMA](./ecma/ecma.md)
+- [ECMA](./ecma/ecma.md)
   - [ECMA-base_Data_Structure](./ecma/base_data_structure.md)
   - [ECMA-String](./ecma/ecma-string.md)
   - [ECMA-Number](./ecma/ecma-number.md)
@@ -32,6 +31,7 @@
   - [Docker](./other/docker.md)
   - [CICD](./other/cicd.md)
   - [Gitlab](./other/stablish_gitlab.md)
+  - [Regedit](./other/regedit.md)
 - lib
   - [VUE](./lib/vue.md)
   - [Echart](./lib/echart.md)
