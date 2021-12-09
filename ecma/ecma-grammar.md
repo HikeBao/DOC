@@ -1,109 +1,28 @@
-#### 显式类型转换
 
-```javascript
-Number(null); // 0
-Number(undefined); // NaN
-Number(true); // 1
-parseInt(true); // NaN
-parseInt(undefined); // NaN
-parseInt(null); // NaN
-parseInt(NaN); // NaN
-parseInt('10', 16); // 16 把10(16),16(10)
-parseInt('123abc'); // 123
-parseInt('abc123'); // NaN
-13.toString(16); // d
-
-# summary parseInt没有Number一样进行数据类型的隐式转换
-```
-
-
-
-#### 隐式类型转换
-
-```javascript
-let a = '123';
-a++;  // 这里隐式类型转换Number(a),然后再a = a + 1;  /、*、-、%都做了隐式转换
-let b = 1 > '2'; // '2'会进行Number('2')的转换才进行对比
-// > < >= <=都会进行字符串转换为数字，前提是比较的一项是Number类型，如果两项都是字符串，则比较ASCII
-let c = 2 > 1 > 3; // false
-let d = 2 > 1 == 1; // true
-let e  = +'123'; //  123 这里的+会进行Number('123')
-// undefined、null、0 没关系，undefined == null 为true
-isNaN('123'); // true 这里进行了隐式转换Number('123')
-isNaN(null); // false
-isNaN(undefined); // true
-Number(1) === Number(1); // true
-Boolean(true) === Boolean(true); // true
-记住，Number和Boolean只会将对应的内容转化为基本类型，没有关键字new的话是不会变成对象的
-```
-
-
-
-#### ASCII和Unicode
-
-```javascript
-# ASCII分为两张表
-表1：0-127
-表2：128-255
-
-Unicode涵盖ASCII码
-'x'.charCodeAt(); // 用来获取字符对应的ASCII码
-```
-
-
-
-#### JavaScript中被认定是假值
-
-```javascript
-false、""、" "、0、null、undefined、NaN
-Tips: [] == 0 //true
-undefined 转换为数字，值为NaN > Number(undefined)
-null 转为数字，值为 0 > Number(null)
-```
-
-
-
-#### `boolean`、`string`、`number`的装箱、拆箱
-
-```javascript
-# str和new String('123')不同
-let str = '123';
-console.log(new String('123').length)
-```
-
-#### padStart、String.raw
-
-```javascript
-使用`string.padStart`方法，我们可以在字符串的开头添加填充。传递的参数大于字符串长度会在字符串前面增加一个空格，如果小于则什么事情没有发生
-
-String.raw函数式用来获取一个模板字符串的原始字符串的，它返回一个字符串，其中忽略了转移符(\n，\v,\t)
-let str = 'C:\Users\lenovo\Desktop'
-console.log(String.raw`${str}`);  // "C:UserslenovoDesktop"
-正常应该是 C:\Users\lenovo\Desktop
-```
 
 #### 变量声明及赋值
 
 ```javascript
-// 这里包含两步：1、声明变量；2、变量赋值
 var a = 10;
-
-// c被声明为全局变量 
-var b = c = 10;
 ```
+
+**这里包含两步：**
+
+1. 声明变量，`var a;`
+2. 变量赋值，`a = 10;`
 
 
 
 #### 原始值与引用值
 
-```javascript
-原始值 > 基本类型 > 栈内存 (Null, Undefined, String, Number, Boolean)
-引用值 > 引用类型 > 堆内存 (Function、 Object、 Array)
+> 基本类型使用的是栈内存 (Null, Undefined, String, Number, Boolean)
+> 引用类型使用的是堆内存 (Function、 Object、 Array、Map、Set)
 
+```javascript
+// 注意，重新赋值的过程不是覆盖的过程.这就是为什么可以恢复数据,这也是基本数据类型不能修改的原因。
 var a = 3;
 var b = a;
-// 注意，重新赋值的过程不是覆盖的过程.这就是为什么可以恢复数据,这也是基本数据类型
-// 不能修改的原因。
+
 a = 1; 
 
 // 引用数据类型的赋值是存地址，如果是重新赋值则会销毁原来的联系。如果是往里面塞东
@@ -118,55 +37,11 @@ arr = [1]; // 重新赋值
 
 
 
-#### 任何数据类型的值 + 字符串都是字符串  // 因为太重要，所以独立一个标题
-
-
-
-#### `NaN`
-
-```javascript
-0 / 0  // NaN
-'a' / 'b' // NaN
-NaN / NaN // NaN
-typeof Infinity  // Number
-```
-
-
-
-#### 运算
-
-```javascript
-4 % 6 // 取余 4
-5 % 3 // 取模 2
-
-// 交换两个变量的值
-a = a + b 
-b = a - b
-a = a - b
-
-let a = 5, b;
-b = --a + --a; // b:7  a:3
-b = --a + a--; // b:8  a:3
-b = --a + a++; // b:8  a:5
-
-// number - string > number - number
-// string - string > ASCII - ASCII   ASCII大于255则是中文，charCodeAt()
-// == 不看数据类型 === 不仅比较数值，也比较数据类型
-NaN == NaN; // false
-
-在`JavaScript`中，只有一个值不等于自身，那就是`NaN`。而且几乎所有的值都有属性，而`null`和`undefined`没有。
-falsty的值有: null, undefined, 0, false, '', ' ', NaN
-
-JavaScript中出现小数精度问题原因我们要站在计算机的角度思考 0.1 + 0.2 这个看似小儿科的问题。我们知道，能被计算机读懂的是二进制，而不是十进制，所以我们先把 0.1 和 0.2 转换成二进制看看
-```
-
-
-
 #### switch和if应用场景
 
 ```javascript
-switch ：当值已经固定了
-if ：当数据是有一个范围的时候
+switch ：使用场景当值已经固定了
+if ：使用场景当数据是有一个范围的时候
 ```
 
 
@@ -190,7 +65,7 @@ for(;i--;) {
 
 
 
-#### `typeof`
+#### `typeof`类型判断是否欺骗了你
 
 ```javascript
 typeof(x); // 输出都是字符串，而且在里面输入没有定义的变量也不会报错
@@ -221,7 +96,6 @@ console.log(typeof(typeof(a))); // string
 
 ```javascript
  function Foo() {
-
      getName = function () { alert(1); }
      return this;
  }
@@ -319,6 +193,8 @@ Number([]) // 0
 [null] == 0 // true
 ```
 
+
+
 #### `import`与`require`
 
 ```javascript
@@ -348,14 +224,6 @@ console.log(x); // 1
 
 
 
-#### How many type does JavaScript have
-
-```javascript
-JavaScript only has primitive type and objects;
-```
-
-
-
 #### 打印引用类型的数据
 
 ```javascript
@@ -363,4 +231,3 @@ JavaScript only has primitive type and objects;
 
 最重要一点就是，如果要将引用类型的数据打印在页面上，必须先将其转换为基本类型。
 ```
-

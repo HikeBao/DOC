@@ -2,6 +2,59 @@
 
 ES6 加强了对 Unicode 的支持，并且扩展了字符串对象。
 
+
+
+#### 任何数据类型的值 + 字符串都是字符串 , 因为太重要，所以独立一个标题
+
+
+
+#### ASCII和Unicode
+
+```javascript
+# ASCII分为两张表
+表1：0-127
+表2：128-255
+
+Unicode涵盖ASCII码
+'x'.charCodeAt(); // 用来获取字符对应的ASCII码
+```
+
+
+
+#### padStart、String.raw
+
+```javascript
+使用`string.padStart`方法，我们可以在字符串的开头添加填充。传递的参数大于字符串长度会在字符串前面增加一个空格，如果小于则什么事情没有发生
+
+String.raw函数式用来获取一个模板字符串的原始字符串的，它返回一个字符串，其中忽略了转移符(\n，\v,\t)
+let str = 'C:\Users\lenovo\Desktop'
+console.log(String.raw`${str}`);  // "C:UserslenovoDesktop"
+正常应该是 C:\Users\lenovo\Desktop
+```
+
+
+
+#### JavaScript中被认定是假值
+
+```javascript
+false、""、" "、0、null、undefined、NaN
+Tips: [] == 0 //true
+undefined 转换为数字，值为NaN > Number(undefined)
+null 转为数字，值为 0 > Number(null)
+```
+
+
+
+#### `boolean`、`string`、`number`的装箱、拆箱
+
+```javascript
+# str和new String('123')不同
+let str = '123';
+console.log(new String('123').length)
+```
+
+#### 
+
 ## 字符的 Unicode 表示法
 
 JavaScript 允许采用`\uxxxx`形式表示一个字符，其中`xxxx`表示字符的 Unicode 码点。

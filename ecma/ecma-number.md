@@ -1,5 +1,90 @@
 # 数值的扩展
 
+
+
+
+
+#### `NaN`
+
+```javascript
+0 / 0  // NaN
+'a' / 'b' // NaN
+NaN / NaN // NaN
+typeof Infinity  // Number
+```
+
+
+
+#### 运算
+
+```javascript
+4 % 6 // 取余 4
+5 % 3 // 取模 2
+
+// 交换两个变量的值
+a = a + b 
+b = a - b
+a = a - b
+
+let a = 5, b;
+b = --a + --a; // b:7  a:3
+b = --a + a--; // b:8  a:3
+b = --a + a++; // b:8  a:5
+
+// number - string > number - number
+// string - string > ASCII - ASCII   ASCII大于255则是中文，charCodeAt()
+// == 不看数据类型 === 不仅比较数值，也比较数据类型
+NaN == NaN; // false
+
+在`JavaScript`中，只有一个值不等于自身，那就是`NaN`。而且几乎所有的值都有属性，而`null`和`undefined`没有。
+falsty的值有: null, undefined, 0, false, '', ' ', NaN
+
+JavaScript中出现小数精度问题原因我们要站在计算机的角度思考 0.1 + 0.2 这个看似小儿科的问题。我们知道，能被计算机读懂的是二进制，而不是十进制，所以我们先把 0.1 和 0.2 转换成二进制看看
+```
+
+
+
+#### 显式类型转换
+
+```javascript
+Number(null); // 0
+Number(undefined); // NaN
+Number(true); // 1
+parseInt(true); // NaN
+parseInt(undefined); // NaN
+parseInt(null); // NaN
+parseInt(NaN); // NaN
+parseInt('10', 16); // 16 把10(16),16(10)
+parseInt('123abc'); // 123
+parseInt('abc123'); // NaN
+13.toString(16); // d
+
+# summary parseInt没有Number一样进行数据类型的隐式转换
+```
+
+
+
+#### 隐式类型转换
+
+```javascript
+let a = '123';
+a++;  // 这里隐式类型转换Number(a),然后再a = a + 1;  /、*、-、%都做了隐式转换
+let b = 1 > '2'; // '2'会进行Number('2')的转换才进行对比
+// > < >= <=都会进行字符串转换为数字，前提是比较的一项是Number类型，如果两项都是字符串，则比较ASCII
+let c = 2 > 1 > 3; // false
+let d = 2 > 1 == 1; // true
+let e  = +'123'; //  123 这里的+会进行Number('123')
+// undefined、null、0 没关系，undefined == null 为true
+isNaN('123'); // true 这里进行了隐式转换Number('123')
+isNaN(null); // false
+isNaN(undefined); // true
+Number(1) === Number(1); // true
+Boolean(true) === Boolean(true); // true
+记住，Number和Boolean只会将对应的内容转化为基本类型，没有关键字new的话是不会变成对象的
+```
+
+
+
 ## 二进制和八进制表示法
 
 ES6 提供了二进制和八进制数值的新的写法，分别用前缀`0b`（或`0B`）和`0o`（或`0O`）表示。
@@ -30,6 +115,8 @@ ES6 提供了二进制和八进制数值的新的写法，分别用前缀`0b`（
 Number('0b111')  // 7
 Number('0o10')  // 8
 ```
+
+
 
 ## Number.isFinite(), Number.isNaN()
 
