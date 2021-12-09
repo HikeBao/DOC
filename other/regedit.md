@@ -1,30 +1,39 @@
+# Regedit 注册表
+
+> 概念：注册表是Microsoft Windows中的一个重要的数据库，用于存储系统和应用程序的设置信息。所以在修改注册表前最好进行注册表备份
+>
+> 应用场景：
+>
+> - 使用注册表完成一些右键打开的功能，包括空白地方右键，鼠标悬浮在文件上右键
+
+
+
 #### 使用注册表完成一些右键打开的功能
 
-```javascript
-注册表是Microsoft Windows中的一个重要的数据库，用于存储系统和应用程序的设置信息。
-# 书写规范
-// 这一句一定要加上，不然执行不了
-Windows Registry Editor Version 5.00  
-[HKEY_CLASSES_ROOT\Directory\Background\shell\ws] 
-// 右键浮窗的文案展示
-@="ws"
- // 这个是给右键后的悬浮添加图标
-"Icon"="C:\\Program Files\\JetBrains\\WebStorm 2019.1.3\\bin\\webstorm64.exe"
+```shell
+Windows Registry Editor Version 5.00
 
-// command就是需要执行的路径,记住后面的%V一定要大写，而且需要有引号(单引号或者双引号)
-[HKEY_CLASSES_ROOT\Directory\Background\shell\ws\command] 
-@="C:\\Program Files\\JetBrains\\WebStorm 2019.1.3\\bin\\webstorm64.exe '%V'"
+[HKEY_CLASSES_ROOT\Directory\shell\vscode]
+@="vscode"
+"Icon"="D:\\software\\install\\vscode\\details\\vs.exe"
 
-`summary` 要注意加上@表示默认值，其他字符ex(`Icon`)则表示是图标
-
-使用regedit的时候，基础注意使用的场景
-# HKEY_CLASSES_ROOT\*
-	- shell 你可以设置简单explorer 的右键菜单扩展,比如在文件上点右键可以设置用记事本浏览等，只有新建几个键，并设置即可。
-	- shellex则比较复杂，你必须懂得win32编程，因为那是通过windows的com接口提供高级功能，比如winrar的菜单，当你在文件上点右键，有用rar压缩，当点击后则会出现winrar,然后操作
-
-# HKEY_CLASSES_ROOT\Directory
-	- Background 用于空白处用什么程序打开文件夹
+[HKEY_CLASSES_ROOT\Directory\shell\vscode\command]
+@="\"D:\\software\\install\\vscode\\details\\vs.exe\" \"--working-dir\" \"%v.\""
 ```
+
+字段说明：
+
+- `Windows Registry Editor Version 5.00`：必须放在`reg`文件的第一行，有点类似`shell`脚本第一行
+
+- `[HKEY_CLASSES_ROOT\Directory\shell\vscode]`：存放脚本静态资源的文件夹
+
+- `@="vscode"`： 鼠标右键的名字
+
+- `"Icon"="D:\\software\\install\\vscode\\details\\vs.exe"`：鼠标右键图标的路径
+
+- `[HKEY_CLASSES_ROOT\Directory\shell\vscode\command]`：存放程序`.exe`的文件夹
+
+- `@="\"D:\\software\\install\\vscode\\details\\vs.exe\" \"--working-dir\" \"%v.\""`：执行程序路径
 
 
 
@@ -41,15 +50,6 @@ Windows Registry Editor Version 5.00
 | 无             | REG_NONE                       | 没有任何特定类型的数据。此数据由系统或应用程序写到注册表，作为二进制值以十六进制的格式显示在注册表编辑器中。 |
 | 链接           | REG_LINK                       | 一个 Unicode 字符串，它命名一个符号链接。                    |
 | QWORD 值       | REG_QWORD                      | 由 64 位整数数字表示的数据。此数据在注册表编辑器中作为二进制值显示，并且是在 Windows 2000 中引入的。 |
-
-
-
-```shell
-# 使用regedit，了解regedit大概，明白regedit是一个数据库，存储着系统里面用户信
-# 息、硬件信息以及硬件配置信息等重要信息
-```
-
-
 
 ```shell
 # 遇到问题
