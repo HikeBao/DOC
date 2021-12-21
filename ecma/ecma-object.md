@@ -1566,7 +1566,29 @@ instanceof运算符用于测试构造函数的prototype属性是否出现在对�
 #### set和get
 
 ```javascript
-let obj = {    set temp (value) {        this.temp = value; // RangeError: Maximum call stack size exceeded    },    get temp () {		return this.temp; // RangeError: Maximum call stack size exceeded            }}# 正确写法var p = {    name:"chen",    _age:18,    get age(){        return this._age;    },    set age(val) {        if (val<0 || val> 100) {//如果年龄大于100就抛出错误            throw new Error("invalid value")        }else{            this._age = val;        }    }};
+let obj = {    
+    set temp (value) {       
+        this.temp = value; // RangeError: Maximum call stack size exceeded    
+    },    
+    get temp () {		
+        return this.temp; // RangeError: Maximum call stack size exceeded            
+    }
+}
+#正确写法
+var p = {    
+    name:"chen",   
+    _age:18,   
+    get age(){       
+        return this._age;   
+    },    
+    set age(val) {        
+        if (val<0 || val> 100) {//如果年龄大于100就抛出错误            
+            throw new Error("invalid value")        
+        } else {            
+            this._age = val;        
+        }    
+    }
+};
 ```
 
 
@@ -1587,3 +1609,46 @@ console.log(obj) // {a: 'three', b: 'two'}
 如果你有两个名称相同的键，则键会被替换掉。它仍然位于第一个键出现的位置，但是值是最后出现那个键的值。
 ```
 
+
+
+## Q & A
+
+Q：如果对象上面某个方法不存在，但是需要业务里面支持，那么我们一般应该怎么做呢？
+
+A：
+
+```javascript
+if ( !Object.is ) {
+    Object.defineProperty(Object, 'is', {
+        value: function (x, y) {
+            if (x === y) {
+                return x !== 0 || 1/x === 1/y; 
+            } else {
+                return x !== x && y !== y; // 排除NaN这种情况
+            }
+        },
+        configurable: true,
+        enumerable: false,
+        writable: true
+    })
+}
+```
+
+<br>
+
+Q：对于Object原型链上面的方法和属性最好不要直接调用，而是通过其它方式。
+
+A：
+
+```javascript
+let objOne = {
+    hasOwnProperty: false
+};
+
+let objTwo = Object.create(null);
+```
+
+可能存在以下两种情况
+
+1. 可能`objOne`本身就存在一个属性叫做`hasOwnProperty`
+2. 可能`objTwo`是没有原型链的，通过`Object.create(null)`构造的。
