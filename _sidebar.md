@@ -43,6 +43,7 @@
   - [Shell](./tool/shell.md)
 - 计算机四大神器
   - [数据结构](./computer/data_structure.md)
+  - [常用设计模式](./computer/design_mode.md)
   - [计算机网络](./computer/network.md)
 - IDE
   - [Webstorm](./ide/webstorm.md)
