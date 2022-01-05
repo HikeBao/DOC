@@ -1,6 +1,7 @@
 - [EventEmitter](#事件分发)
 - [单例模式](#单例模式)
 - [观察者模式](#观察者模式)
+- [策略模式](#策略模式)
 
 
 
@@ -151,4 +152,76 @@ subject.add(observer1);
 subject.add(observer2);
 subject.notify(111,2,3,4);
 ```
+
+
+
+#### 策略模式
+
+> 背景：电影院购票有三种优惠政策
+>
+> 1. 学生8折
+> 2. 儿童原价
+> 3. vip半折
+
+```typescript
+interface Discount {
+    calculate (price: number): number;
+}
+
+class StudentDiscount implements Discount {
+    static rate = 0.8;
+    calculate(price: number) {
+        return price * StudentDiscount.rate;
+    }
+}
+
+class ChildrenDiscount implements Discount {
+    static rate = 1;
+    calculate(price: number) {
+        return price * ChildrenDiscount.rate;
+    }
+}
+
+class VIPDiscount implements Discount {
+    static rate = 0.5;
+    calculate(price: number) {
+        return price * VIPDiscount.rate;
+    }
+}
+
+class MovieTicket {
+    discount:!Discount;
+	setDiscount (discount: Discount):MovieTicket {
+        this.discount = discount;
+        return this;
+    }
+	getPrice (price:number):number {
+        if (!this.discount || price === 0) {
+            return 0;
+        }
+        return this.discount.calculate(price);
+    }
+}
+
+let student = new StudentDiscount();
+let chidren = new ChildrenDiscount();
+let vip = new VIPDiscount();
+let ticket = new MovieTicket();
+ticket.setDiscount(student).getPrice(30);
+ticket.setDiscount(chidren).getPrice(30);
+ticket.setDiscount(vip).getPrice(30);
+
+# Summary：觉得策略模式就是将每一种策略具体实现逻辑抽离到一个具体的function或者类里面实现。一般情况会将所有
+# 的折扣算法放在同一个函数里面实现会导致方法非常庞大，后续维护违反了“开闭原则”，而且复用性差
+```
+
+
+
+
+
+
+
+
+
+
 
