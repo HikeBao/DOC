@@ -47,4 +47,5 @@
   - [计算机网络](./computer/network.md)
 - IDE
   - [Webstorm](./ide/webstorm.md)
+  - [Vscode](./ide/vscode.md)
 
