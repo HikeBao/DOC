@@ -34,6 +34,7 @@
   - [Regedit](./other/regedit.md)
 - lib
   - [VUE](./lib/vue.md)
+    - [VUE3](./lib/vue3.md)
   - [Echart](./lib/echart.md)
 - Tool
   - [Typescript](./tool/typescript.md)
