@@ -108,7 +108,6 @@ this.$emit('xxxEvent'， value) // vue2
             attribute: 999
         });
         let tempProp = props.otherProp; // 这里使用了prop就需要在setup同级声明下props
-        
     }
 }
 ```
